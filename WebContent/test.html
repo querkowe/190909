@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url: 'foodInfo.xml',
+            type: 'get',
+            dataType: 'xml',
+            success: function (xml) {
+                // 각 food 태그마다 데이터를 불러와 변수에 저장
+                $('food', xml).each(function () {
+                    var code = $(this).find('code').text();
+                    var name = $(this).find('name').text();
+                    var maker = $(this).find('maker').text();
+                    var material = $(this).find('material').text();
+                    var img = $(this).find('image').text();
+
+                    $('#mat_info').append("<div class='info_container' style='float: left'><div class='row'><div class='col-md-6' style='height: auto; width: auto; max-width: 250px; max-height: 250px;'><img src='./" +img+"' class='img-fluid'><div class='overlay_container bg-dark'></div></div><div class='col-5'><h3>"+name+"</h3><div class='separator-2'></div><div>"+material+"</div><div class='separator-2'></div><div class='btn-group' role='group'><button type='button' class='btn btn-default btn-sm'>추가</button><button type='button' class='btn btn-default btn-sm'>찜</button></div></div></div></div>");
+                    //$('.info_container').append("<div class='overlay-bottom'><div class='links'><a class='btn btn-gray-transparent btn-animated btn-sm' href='#'>상품 정보로 이동</div></div>");
+                });
+            }
+        });
+        $(function () {
+            $('.overlay').css('display','none');
+
+            $('.info_container').on('mouseover',function () {
+                $('.overlay').css('display','block');
+            });
+            $('.info_container').on('mouseleave',function () {
+                $('.overlay').css('display','none');
+            });
+        });
+    </script>
+    <title>Test HTML</title>
+</head>
+
+<body>
+    <section id="mat_info" style="float: left">
+    </section>
+</body>
+
+</html>
