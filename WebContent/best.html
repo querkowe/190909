@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<title>Hello, world!</title>
+<script type="text/javascript">
+$.ajax({
+    url: 'foodInfo.xml',
+    type: 'get',
+    dataType: 'xml',
+    success: function (xml) {
+        // 각 food 태그마다 데이터를 불러와 변수에 저장
+        $('food', xml).each(function (i) {
+        	if(i<5){
+            var code = $(this).find('code').text();
+            var name = $(this).find('name').text();
+            var maker = $(this).find('maker').text();
+            var material = $(this).find('material').text();
+            var img = $(this).find('image').text();
+
+            /* $('#results').append("<div class='info_container' style='float: left'><div class='row'><div class='col-md-6' style='height: auto; width: auto; max-width: 250px; max-height: 250px;'><img src='./" +img+"' class='img-fluid'><div class='overlay_container bg-dark'></div></div><div class='col-5'><h3>"+name+"</h3><div class='separator-2'></div><div>"+material+"</div><div class='separator-2'></div><div class='btn-group' role='group'><button type='button' class='btn btn-default btn-sm'>추가</button><button type='button' class='btn btn-default btn-sm'>찜</button></div></div></div></div>"); */
+            $('#results').append("<div class='card'style='max-width: 640px;  float: left; margin-top:15px; margin-right:10px;margin-bottom:15px;'><div class='row no-gutters'><div class='col-md-4'><img src="..." class="card-img" alt="..."></div><div class="col-md-8"><div class='card-body'><h5 class='card-title'><a href='./info?"+name+".html'>"+name+"</a></h5><div class='separator-2'></div><p class='card-text'>"+material+"</p><div class='separator-2'></div><div class='btn-group' role='group'><button type='button' class='btn btn-default btn-sm'>추가</button><button type='button' class='btn btn-default btn-sm'>찜</button></div></div></div></div></div>");
+        	}
+        });
+    }
+});
+
+</script>
+
+</head>
+<body>
+	<!-- head nav bar for login -->
+	<nav
+		class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+		<div class="collapse navbar-collapse flex-grow-0"
+			id="navbarSupportedContent">
+			<ul class="navbar-nav text-right">
+				<li class="nav-item active"><a class="nav-link" href="#">login</a>
+				</li>
+				<li class="nav-item active"><a class="nav-link" href="#">회원정보</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!-- menu nav bar -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#"><img alt="ssafy"
+			src="./img/header-logo.jpg"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="navbar collapse navbar-collapse"
+			id="navbarSupportedContent">
+			<ul class="nav navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">상품정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">베스트 섭취 정보</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#">내 섭취 정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">예상 섭취 정보</a>
+				</li>
+					<li>
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="search"
+							placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!-- title -->
+	<div class="jumbotron jumbotron-fluid bg-secondary" style = 'margin-bottom:0%'>
+		<div class="container text-center" style="color:white">
+			<h1>WHAT WE PROVIDE</h1>
+			<div class="seperator"></div>
+			<p>건강한 삶을 위한 먹거리 프로젝트</p>
+		</div>
+	</div>
+	<!-- search bar -->
+	<div class="jumbotron jumbotron-fluid bg-dark">
+		<div class="container bg-dark">
+			<form>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="row">
+						</div>
+						<div class="row">
+							<label style='color : #aaa; margin-left:2%'>검색 조건</label> 
+							<select class="form-control" style='background-color : #555; color : #ddd; margin-left:3%; margin-right:3%'>
+								<option>상품명</option>
+								<option>제조사</option>
+								<option>재료명</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="row">
+							<label style='color : #aaa; margin-left:2%'>검색 단어</label>
+						</div>
+						<div class="row">
+							<div class="col-md-11">
+								<input class="form-control mr-sm-2" type="search"
+									placeholder="Search" aria-label="Search" style='background-color : #555; color : #ddd'>
+							</div>
+							<div class="col-md-1">
+								<button type="button" class="btn btn-outline-secondary my-2 my-sm-0">Search</button>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="container-fluid bg-3 text-center"></div>
+	
+	<!-- search result section -->
+	<section class='main-container'>
+        <div class='container-fluid text-center' id="results">
+        </div>	
+	</section>
+	
+	<!-- footer contacts -->
+    <footer>
+    	<div class="container-fluid bg-3">
+	        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Find Us</h5>
+	        <div class="separator-2"></div>
+	        <ul class="list-unstyled">
+	            <li><img src="./img/maps-and-flags.png" alt="place"> (SSAFY) 서울시 강남구테헤란로 멀티스퀘어</li>
+	            <li><img src="" alt=""> 1544-9001</li>
+	            <li><img src="./img/opened.png" alt="">admin@ssafy.com</li>
+	        </ul>
+	
+	        <div class="footer-copyright text-center py-3">
+	            Copyright by SSAFY All rights reserved
+	        </div>
+    	</div>
+    </footer>
+	
+	<!-- Optional JavaScript -->	
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+</body>
+</html>

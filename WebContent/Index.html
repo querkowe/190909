@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>Hello, world!</title>
+<title>WHAT WE PROVIDE</title>
 <style>
 .ml-auto .dropdown-menu {
 	left: auto !important;
@@ -114,12 +114,21 @@ body>nav>div>ul>div>ul{
 	background-color : black;
 }
 .card-text {
- overflow: hidden;
- text-overflow: ellipsis;
- white-space: nowrap;
- width: 400px;
- height: 150px;
+	display: inline-block;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height: 1.2;
+	height: 100%;
+	text-align: left;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 }
+
 body>nav>div>ul>div>ul{
 	background-color : black;
 }
@@ -387,7 +396,8 @@ $.ajax({
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
 							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+						<button class="btn btn-outline-success my-2 my-sm-0">
+					<span class="fa fa-search"></span></button>
 					</form>
 				</li>
 			</ul>

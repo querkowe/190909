@@ -226,7 +226,7 @@ body>nav>div>ul>div>ul{
 </script>
 </head>
 <body>
-	<<nav
+	<nav
 		class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
 		<div class="collapse navbar-collapse flex-grow-0"
 			id="navbarSupportedContent">
@@ -441,31 +441,33 @@ body>nav>div>ul>div>ul{
 	</div>
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="./Index.com"><img alt="ssafy"
-			src="./img/logo.jpg"></a>
+		<a class="navbar-brand" href="./Index.html"><img alt="ssafy"
+			src="./img/header-logo.jpg"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+		<div class="navbar collapse navbar-collapse"
+			id="navbarSupportedContent">
+			<ul class="nav navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li> <!-- 미구현 -->
 				<li class="nav-item"><a class="nav-link" href="./lists.html">상품정보</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">베스트 섭취 정보</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">내 섭취 정보</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">예상 섭취 정보</a>
+				<li class="nav-item"><a class="nav-link" href="#">내 섭취 정보</a></li> <!-- 미구현 -->
+				<li class="nav-item"><a class="nav-link" href="#">예상 섭취 정보</a> <!-- 미구현 -->
+				</li>
+					<li>
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="search"
+							placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0">
+					<span class="fa fa-search"></span></button>
+					</form>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-sm-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button type="button" class="btn btn-success">
-					<span class="fa fa-search"></span>
-				</button>
-			</form>
 		</div>
 	</nav>
 	<h1 class="page-title text-center">제품 정보</h1>

@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>Hello, world!</title>
+<title>상품정보</title>
 <style>
 .ml-auto .dropdown-menu {
 	left: auto !important;
@@ -115,11 +115,6 @@ body>nav>div>ul>div>ul {
 }
 
 .card-text {
-	/* overflow: hidden;
- text-overflow: ellipsis;
- white-space: nowrap;
- width: 400px;
- height: 150px;  */
 	display: inline-block;
 	width: 360px;
 	white-space: nowrap;
@@ -154,7 +149,7 @@ $.ajax({
             var img = $(this).find('image').text();
 
             /* $('#results').append("<div class='info_container' style='float: left'><div class='row'><div class='col-md-6' style='height: auto; width: auto; max-width: 250px; max-height: 250px;'><img src='./" +img+"' class='img-fluid'><div class='overlay_container bg-dark'></div></div><div class='col-5'><h3>"+name+"</h3><div class='separator-2'></div><div>"+material+"</div><div class='separator-2'></div><div class='btn-group' role='group'><button type='button' class='btn btn-default btn-sm'>추가</button><button type='button' class='btn btn-default btn-sm'>찜</button></div></div></div></div>"); */
-            $('#results').append("<div class='card'style='width: 640px; height: 300px; float: left; margin-top:15px; margin-right:10px;margin-bottom:15px;'><div class='row no-gutters'><div class='col-md-4'><img src=./" +img+" class='card-img' alt=" +img+"></div><div class='col-md-8'><div class='card-body'><h5 class='card-title'><a href='./food_info_page.html?"+name+"'>"+name+"</a></h5><div class='separator-2'></div><p class='card-text'>"+material+"</p><div class='separator-2'></div><div class='btn-group' role='group'><button type='button' class='btn btn-default btn-sm'>추가</button><button type='button' class='btn btn-default btn-sm'>찜</button></div></div></div></div></div>");
+            $('#results').append("<div class='card'style='width: 640px; height: 300px; float: left; margin-left:auto; margin-top:15px; margin-right:10px;margin-bottom:15px;'><div class='row no-gutters'><div class='col-md-4'><img src=./" +img+" class='card-img' alt=" +img+"></div><div class='col-md-8'><div class='card-body'><h5 class='card-title'><a href='./food_info_page.html?"+name+"'>"+name+"</a></h5><div class='separator-2'></div><p class='card-text'>"+material+"</p><div class='separator-2'></div><div class='btn-group' role='group'><button type='button' class='btn btn-default btn-sm'>추가</button><button type='button' class='btn btn-default btn-sm'>찜</button></div></div></div></div></div>");
 
         });
     }
@@ -404,7 +399,8 @@ $.ajax({
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
 							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+						<button class="btn btn-outline-success my-2 my-sm-0">
+					<span class="fa fa-search"></span></button>
 					</form>
 				</li>
 			</ul>
