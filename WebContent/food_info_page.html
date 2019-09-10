@@ -7,13 +7,12 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>Hello, world!</title>
+<title>제품 정보</title>
 <style>
 .ml-auto .dropdown-menu {
 	left: auto !important;
@@ -124,33 +123,110 @@ body>nav>div>ul>div>ul{
 	background-color : black;
 }
 </style>
-<script type="text/javascript">
-$.ajax({
-    url: 'foodInfo.xml',
-    type: 'get',
-    dataType: 'xml',
-    success: function (xml) {
-        // 각 food 태그마다 데이터를 불러와 변수에 저장
-        $('food', xml).each(function () {
-            var code = $(this).find('code').text();
-            var name = $(this).find('name').text();
-            var maker = $(this).find('maker').text();
-            var material = $(this).find('material').text();
-            var img = $(this).find('image').text();
-
-            /* $('#results').append("<div class='info_container' style='float: left'><div class='row'><div class='col-md-6' style='height: auto; width: auto; max-width: 250px; max-height: 250px;'><img src='./" +img+"' class='img-fluid'><div class='overlay_container bg-dark'></div></div><div class='col-5'><h3>"+name+"</h3><div class='separator-2'></div><div>"+material+"</div><div class='separator-2'></div><div class='btn-group' role='group'><button type='button' class='btn btn-default btn-sm'>추가</button><button type='button' class='btn btn-default btn-sm'>찜</button></div></div></div></div>"); */
-            $('#results').append("<div class='container-fluid' style='width: 70%;' id='result'><div class='row'><div class='main col-12'><div class='card mb-4' style='margin-left: 12%; margin-right: 12%;'><div class='row no-gutters'><div class='col-md-4'><img src=" +img+" class='card-img' alt="+name+"></div><div class='col-md-8'><div class='card-body'><h5 class='card-title'><a href='./food_info_page.html?"+name+".html'>"+name+"</a></h5><div class='separator-2'></div><p class='card-text'>"+material+"</p><div class='separator-2'></div><div class='btn-group' role='group'><button type='button' class='btn btn-default btn-sm'>추가</button><button type='button' class='btn btn-default btn-sm'>찜</button></div></div></div></div></div></div></div></div>");
-            
+<script src="js/Chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function(){
+        // this fucntion parsing the foodinfo.xml file
+		$.ajax({
+            url: 'foodInfo.xml',
+            data: 'get',
+            dataType: 'xml',
+            // 일정 갯수의 데이터만 가져오고싶다 ==> for문을 이용한다
+            // 이후 각 페이지별로 배수를 정해, 페이지 (배수 * 범위)로 데이터를 가져오면 될듯
+            success: function (xml) {
+                // 데이터 정제 시작
+                $('food', xml).each(function () {
+                    // xml에서 뽑아온 데이터
+                    var code = $(this).find('code').text();
+                    var name = $(this).find('name').text();
+                    var maker = $(this).find('maker').text();
+                    var material = $(this).find('material').text();
+                    var image = $(this).find('image').text();
+                    $('#Material').text(material);
+                    $('#product_img').attr('src', './' + image);
+                    $('#product_name').text(name);
+                    $('#manufacturer').text(maker);
+                });
+            }
         });
-    }
-});
-
+        $.ajax({
+            url: 'FoodNutritionInfo.xml',
+            data: 'get',
+            dataType: 'xml',
+            success: function (xml) {
+                $('item', xml).each(function () {
+                    var name = $(this).find('DESC_KOR').text();
+                    if(name == '아카페라아메리카노') {
+	                    var serv_wt = $(this).find('SERVING_WT').text();
+	                    var nutr1 = $(this).find('NUTR_CONT1').text();
+	                    var nutr2 = $(this).find('NUTR_CONT2').text();
+	                    var nutr3 = $(this).find('NUTR_CONT3').text();
+	                    var nutr4 = $(this).find('NUTR_CONT4').text();
+	                    var nutr5 = $(this).find('NUTR_CONT5').text();
+	                    var nutr6 = $(this).find('NUTR_CONT6').text();
+	                    var nutr7 = $(this).find('NUTR_CONT7').text();
+	                    var nutr8 = $(this).find('NUTR_CONT8').text();
+	                    var nutr9 = $(this).find('NUTR_CONT9').text();
+	                    var name = $(this).find('BGN_YEAR').text();
+	                    var maker = $(this).find('ANIMAL_PLANT').text();
+	                    $('#daily_serving').text(serv_wt);
+	                    $('#calorie').text(nutr1);
+	                    $('#carbohydrate').text(nutr2);
+	                    $('#protein').text(nutr3);
+	                    $('#fat').text(nutr4);
+	                    $('#sugars').text(nutr5);
+	                    $('#natrium').text(nutr6);
+	                    $('#cholesterol').text(nutr7);
+	                    $('#saturatedFattyAcids').text(nutr8);
+	                    $('#transFats').text(nutr9);
+	                    var chart_data=[nutr1,nutr2,nutr3,nutr4,nutr5,nutr6,nutr7,nutr8,nutr9];
+                    }
+                    var ctx = document.getElementById("doughnutChart").getContext("2d");
+            		var myChart = new Chart(ctx, {
+            			type : 'doughnut',
+            			data : {
+            				labels : [ "칼로리", "탄수화물", "단백질", "지방", "당류", "나트륨", "콜레스테롤",
+            						"포화 지방산", "트렌스지방" ],
+            				datasets : [ {
+            					label : '# of Votes',
+            					data : chart_data,
+            					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+            							'rgba(54, 162, 235, 0.2)',
+            							'rgba(255, 206, 86, 0.2)',
+            							'rgba(75, 192, 192, 0.2)',
+            							'rgba(153, 102, 255, 0.2)',
+            							'rgba(255, 159, 64, 0.2)',
+            							'rgba(255, 153, 255, 0.2)',
+            							'rgba(102, 0, 153, 0.2)', 'rgba(51, 0, 0, 0.2)' ],
+            					borderColor : [ 'rgba(255, 99, 132, 1)',
+            							'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+            							'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+            							'rgba(255, 159, 64, 1)', 'rgba(255, 153, 255, 1)',
+            							'rgba(102, 0, 153, 1)', 'rgba(51, 0, 0, 1)' ],
+            					borderWidth : 1
+            				} ]
+            			},
+            			options : {
+            				responsive : true
+            			}
+            		});
+                });
+            }
+        });
+	})
 </script>
-
 </head>
 <body>
-	<!-- head nav bar for login -->
-	<nav
+	<<nav
 		class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
 		<div class="collapse navbar-collapse flex-grow-0"
 			id="navbarSupportedContent">
@@ -363,89 +439,137 @@ $.ajax({
 			<br>
 		</div>
 	</div>
-	<!-- menu nav bar -->
+	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="./Index.html"><img alt="ssafy"
-			src="./img/header-logo.jpg"></a>
+		<a class="navbar-brand" href="./Index.com"><img alt="ssafy"
+			src="./img/logo.jpg"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="navbar collapse navbar-collapse"
-			id="navbarSupportedContent">
-			<ul class="nav navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li> <!-- 미구현 -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
 				<li class="nav-item"><a class="nav-link" href="./lists.html">상품정보</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">베스트 섭취 정보</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">내 섭취 정보</a></li> <!-- 미구현 -->
-				<li class="nav-item"><a class="nav-link" href="#">예상 섭취 정보</a> <!-- 미구현 -->
-				</li>
-					<li>
-					<form class="form-inline my-2 my-lg-0">
-						<input class="form-control mr-sm-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-					</form>
+				<li class="nav-item"><a class="nav-link" href="#">내 섭취 정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">예상 섭취 정보</a>
 				</li>
 			</ul>
-		</div>
-	</nav>
-	<!-- title -->
-	<div class="jumbotron jumbotron-fluid bg-secondary" style = 'margin-bottom:0%'>
-		<div class="container text-center" style="color:white">
-			<h1>WHAT WE PROVIDE</h1>
-			<div class="seperator"></div>
-			<p>건강한 삶을 위한 먹거리 프로젝트</p>
-		</div>
-	</div>
-	<!-- search bar -->
-	<div class="jumbotron jumbotron-fluid bg-dark">
-		<div class="container bg-dark">
-			<form>
-				<div class="row">
-					<div class="col-md-3">
-						<div class="row">
-						</div>
-						<div class="row">
-							<label style='color : #aaa; margin-left:2%'>검색 조건</label> 
-							<select class="form-control" style='background-color : #555; color : #ddd; margin-left:3%; margin-right:3%'>
-								<option>상품명</option>
-								<option>제조사</option>
-								<option>재료명</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-9">
-						<div class="row">
-							<label style='color : #aaa; margin-left:2%'>검색 단어</label>
-						</div>
-						<div class="row">
-							<div class="col-md-11">
-								<input class="form-control mr-sm-2" type="search"
-									placeholder="Search" aria-label="Search" style='background-color : #555; color : #ddd'>
-							</div>
-							<div class="col-md-1">
-								<button type="button" class="btn btn-outline-secondary my-2 my-sm-0">Search</button>
-							</div>
-						
-						</div>
-					</div>
-				</div>
+			<form class="form-inline my-2 my-sm-0">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Search" aria-label="Search">
+				<button type="button" class="btn btn-success">
+					<span class="fa fa-search"></span>
+				</button>
 			</form>
 		</div>
+	</nav>
+	<h1 class="page-title text-center">제품 정보</h1>
+	<div width="100" align="center">
+		<img src="./img/shopping-bag.png" width="50" />
 	</div>
-	<div class="container-fluid bg-3 text-center"></div>
+	<div class="container">
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td rowspan="4" width=100><img id=product_img></td>
+						<td width=100>제품명</td>
+						<td id="product_name"></td>
+					</tr>
+					<tr>
+						<td width=100>제조사</td>
+						<td id="manufacturer"></td>
+					</tr>
+					<tr>
+						<td width=100>원재료</td>
+						<td id="Material"></td>
+					</tr>
+					<tr>
+						<td width=100>알레르기 성분</td>
+						<td id="allergy"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<form class="clearfix row grid-space-10">
+			<div class="form-group">
+				<label>Quantity</label> <input type="text" class="form-control"
+					id="qnt" name="qnt" value="1">
+			</div>
+		</form>
+		<div class="product elements-list">
+			<label> </label>
+			<div class="btn-group">
+				<a href="#" onclick="addIntakeFood(20)"
+					class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i>
+					추가</a> <a href="#" onclick="addIntakePrev(20)"
+					class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i>
+					찜</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<h4 class="space-top">영양 정보</h4>
+		<div class="row">
+			<div class="col-sm-6">
+				<canvas id="doughnutChart" height="230"></canvas>
+			</div>
+			<div class="col-sm-6">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td width='200'>일일 제공량</td>
+							<td id="daily_serving"></td>
+						</tr>
+						<tr>
+							<td width='200'>칼로리</td>
+							<td id="calorie"></td>
+						</tr>
+						<tr>
+							<td width='200'>탄수화물</td>
+							<td id="carbohydrate"></td>
+						</tr>
+						<tr>
+							<td width='200'>단백질</td>
+							<td id="protein"></td>
+						</tr>
+						<tr>
+							<td width='200'>지방</td>
+							<td id="fat"></td>
+						</tr>
+						<tr>
+							<td width='200'>당류</td>
+							<td id="sugars"></td>
+						</tr>
+						<tr>
+							<td width='200'>나트륨</td>
+							<td id="natrium"></td>
+						</tr>
+						<tr>
+							<td width='200'>콜레스테롤</td>
+							<td id="cholesterol"></td>
+						</tr>
+						<tr>
+							<td width='200'>포화 지방산</td>
+							<td id="saturatedFattyAcids"></td>
+						</tr>
+						<tr>
+							<td width='200'>트렌스지방</td>
+							<td id="transFats"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 	
-	<!-- search result section -->
-	<section class='main-container' id="results">
-	
-	</section>
-	
-	<!-- footer contacts -->
-   <footer>
+	<footer style='clear:both'>
     	<div class="container-fluid bg-03">
 	        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Find Us</h5>
 	        <div class="separator-2"></div>
@@ -460,19 +584,13 @@ $.ajax({
 	        </div>
     	</div>
     </footer>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then
+					Bootstrap JS -->
 	
-	<!-- Optional JavaScript -->	
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+
